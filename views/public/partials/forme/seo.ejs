@@ -1,0 +1,11 @@
+<%
+  const titleValue = pageTitle || settings.store.name || 'FORME';
+  const descriptionValue = metaDescription || settings.store.description || '';
+  const canonicalValue = `${siteOrigin}${typeof path !== 'undefined' ? path : '/'}`;
+%>
+<link rel="canonical" href="<%= canonicalValue %>">
+<meta property="og:title" content="<%= titleValue %>">
+<meta property="og:description" content="<%= descriptionValue %>">
+<meta property="og:type" content="website">
+<meta property="og:url" content="<%= canonicalValue %>">
+<meta name="twitter:card" content="summary">

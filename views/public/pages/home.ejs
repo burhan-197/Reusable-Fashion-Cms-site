@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-brand="editorial" data-mode="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= metaDescription %>">
+  <meta name="theme-color" content="#20221f">
+  <title><%= pageTitle %></title>
+  <%- include('../partials/forme/seo') %>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2320221f' d='M0 0h32v32H0z'/%3E%3Cpath fill='%23fff' d='M9 7h16v4H13v5h10v4H13v7H9z'/%3E%3C/svg%3E">
+  <% if (formeHomepage.hero.enabled && formeHomepage.hero.image) { %><link rel="preload" href="<%= safeAssetUrl(formeHomepage.hero.image) %>" as="image" fetchpriority="high"><% } %>
+  <link rel="stylesheet" href="/css/forme/theme.css">
+  <link rel="stylesheet" href="/css/forme/styles.css">
+  <link rel="stylesheet" href="/css/forme/commerce.css">
+  <link rel="stylesheet" href="/css/forme/cms-footer.css">
+  <%- include('../partials/forme/theme-settings') %>
+</head>
+<body class="storefront" data-cms-storefront="forme" id="top" data-currency-code="USD" data-currency-symbol="$" data-currency-position="before">
+  <a class="f-skip-link" href="#main">Skip to content</a>
+  <% const h = formeHomepage; %>
+  <%- include('../partials/forme/header', { active: 'home' }) %>
+  <%- include('../partials/forme/search-overlay') %>
+
+  <main id="main">
+    <% if (h.hero.enabled) { %>
+      <section class="f-hero" data-section="hero" aria-labelledby="hero-title">
+        <div class="f-hero-media" style="--f-image-position:<%= h.hero.imagePosition %>"><img src="<%= safeAssetUrl(h.hero.image) %>" width="1672" height="941" alt="<%= h.hero.imageAlt %>" fetchpriority="high" decoding="async"></div>
+        <div class="f-container"><div class="f-hero-content">
+          <div class="f-hero-top"><p class="f-eyebrow"><%= h.hero.eyebrow %></p></div>
+          <h1 id="hero-title"><%= h.hero.titleLine1 %><br><%= h.hero.titleLine2Before %> <em><%= h.hero.titleHighlight %></em></h1>
+          <p class="f-hero-copy"><%= h.hero.descriptionLine1 %><br><%= h.hero.descriptionLine2 %></p>
+          <div class="f-hero-bottom"><a class="f-button f-button--image" href="<%= h.hero.buttonUrl %>"><%= h.hero.buttonText %> <span class="f-link-arrow" aria-hidden="true"></span></a><p class="f-hero-caption"><span><%= h.hero.captionLeft %></span><span><%= h.hero.captionRight %></span></p></div>
+        </div></div>
+      </section>
+    <% } %>
+
+    <% if (h.brandLine.enabled) { %><div class="f-container f-brand-line"><p><%= h.brandLine.text %></p><a href="<%= h.brandLine.linkUrl %>"><%= h.brandLine.linkText %> <span class="f-link-arrow" aria-hidden="true"></span></a></div><% } %>
+
+    <% if (h.collections.enabled) { %>
+      <section class="f-container f-section" id="collections" data-section="collections" aria-labelledby="collections-title">
+        <div class="f-section-heading"><div><h2 class="f-heading" id="collections-title"><%= h.collections.headingLine1 %><br><%= h.collections.headingLine2Before %> <em><%= h.collections.headingHighlight %></em></h2></div><p><%= h.collections.descriptionLine1 %><br><%= h.collections.descriptionLine2 %></p></div>
+        <div class="f-collection-grid"><% h.collections.cards.forEach(card => { %><a class="f-collection-card" href="<%= card.linkUrl %>"><div class="f-collection-image" style="--f-image-position:<%= card.imagePosition %>"><img src="<%= safeAssetUrl(card.image) %>" width="1122" height="1402" alt="<%= card.imageAlt %>" loading="lazy" decoding="async"></div><div class="f-collection-caption"><div><h3><%= card.title %></h3><p><%= card.description %></p></div><span class="f-collection-arrow f-link-arrow" aria-hidden="true"></span></div></a><% }) %></div>
+      </section>
+    <% } %>
+
+    <% if (h.newArrivals.enabled) { %>
+      <section class="f-container f-section f-products-section" id="new-arrivals" data-section="new-arrivals" aria-labelledby="new-arrivals-title">
+        <div class="f-section-heading"><div><p class="f-eyebrow"><%= h.newArrivals.eyebrow %></p><h2 class="f-heading" id="new-arrivals-title"><%= h.newArrivals.headingBefore %> <em><%= h.newArrivals.headingHighlight %></em></h2></div><a class="f-text-link" href="<%= h.newArrivals.linkUrl %>"><%= h.newArrivals.linkText %> <span class="f-link-arrow" aria-hidden="true"></span></a></div>
+        <% if (homeNewArrivals.length) { %><div class="f-product-grid"><% homeNewArrivals.forEach(product => { %><%- include('../partials/forme/components/home-product-card', { cardProduct: product }) %><% }) %></div><% } else { %><div class="f-empty-state"><div class="f-empty-state-inner"><p class="f-eyebrow">Ready for your catalog</p><h2>Add your first products</h2><p>The Lite admin can add products, images, categories, prices and stock.</p></div></div><% } %>
+      </section>
+    <% } %>
+
+    <% if (h.editorial.enabled) { %>
+      <section class="f-editorial" id="the-edit" data-section="editorial" aria-labelledby="edit-title"><div class="f-editorial-grid">
+        <div class="f-editorial-image" style="--f-image-position:<%= h.editorial.imagePosition %>"><img src="<%= safeAssetUrl(h.editorial.image) %>" width="1024" height="1536" alt="<%= h.editorial.imageAlt %>" loading="lazy" decoding="async"></div>
+        <div class="f-editorial-copy"><p class="f-eyebrow"><%= h.editorial.eyebrow %></p><h2 class="f-heading" id="edit-title"><%= h.editorial.headingLine1 %><br><%= h.editorial.headingLine2Before %> <em><%= h.editorial.headingHighlight %></em></h2><p><%= h.editorial.body %></p><a class="f-text-link" href="<%= h.editorial.linkUrl %>"><%= h.editorial.linkText %> <span class="f-link-arrow" aria-hidden="true"></span></a><div class="f-editorial-index"><%= h.editorial.indexText %></div></div>
+      </div></section>
+    <% } %>
+
+    <% if (h.campaign.enabled) { %>
+      <section class="f-container f-season" data-section="collection-banner" aria-labelledby="season-title"><div class="f-season-media" style="--f-image-position:<%= h.campaign.imagePosition %>"><img src="<%= safeAssetUrl(h.campaign.image) %>" width="1672" height="941" alt="<%= h.campaign.imageAlt %>" loading="lazy" decoding="async"></div><div class="f-season-inner"><p class="f-eyebrow"><%= h.campaign.eyebrow %></p><h2 class="f-heading" id="season-title"><%= h.campaign.headingBefore %> <em><%= h.campaign.headingHighlight %></em></h2><p><%= h.campaign.descriptionLine1 %><br><%= h.campaign.descriptionLine2 %></p><a class="f-button f-button--image" href="<%= h.campaign.buttonUrl %>"><%= h.campaign.buttonText %> <span class="f-link-arrow" aria-hidden="true"></span></a></div></section>
+    <% } %>
+
+    <% if (h.bestSellers.enabled && homeBestSellers.length) { %>
+      <section class="f-container f-section f-trending" id="best-sellers" data-section="best-sellers" aria-labelledby="best-sellers-title"><div class="f-section-heading"><div><p class="f-eyebrow"><%= h.bestSellers.eyebrow %></p><h2 class="f-heading" id="best-sellers-title"><%= h.bestSellers.headingBefore %> <em><%= h.bestSellers.headingHighlight %></em></h2></div><p><%= h.bestSellers.descriptionLine1 %><br><%= h.bestSellers.descriptionLine2 %></p></div><div class="f-product-grid"><% homeBestSellers.forEach(product => { %><%- include('../partials/forme/components/home-product-card', { cardProduct: product }) %><% }) %></div></section>
+    <% } %>
+
+    <% if (h.brandStory.enabled) { %>
+      <section class="f-story f-section" id="our-story" data-section="brand-story" aria-labelledby="story-title"><div class="f-container f-story-grid"><div class="f-story-identity" aria-hidden="true"><div class="f-story-mark"><%= h.brandStory.mark %></div><p class="f-story-note"><%= h.brandStory.note %></p></div><div class="f-story-copy"><p class="f-eyebrow"><%= h.brandStory.eyebrow %></p><h2 class="f-heading" id="story-title"><%= h.brandStory.headingLine1 %><br><%= h.brandStory.headingLine2Before %> <em><%= h.brandStory.headingHighlight %></em></h2><p><%= h.brandStory.body %></p></div></div></section>
+    <% } %>
+  </main>
+  <%- include('../partials/forme/footer') %>
+</body>
+</html>

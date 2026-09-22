@@ -1,0 +1,7 @@
+<%
+  const card = cardProduct;
+  const images = Array.isArray(card.images) ? card.images.filter(Boolean) : [];
+  const image = images[0] || '';
+  const slug = card.slug || '';
+%>
+<article class="f-product"><div class="f-product-media"><a href="/products/<%= encodeURIComponent(slug) %>" aria-label="View <%= card.name %>"><% if (image) { %><img src="<%= responsiveImageUrl(image, 900) %>" alt="<%= card.name %>" loading="lazy" decoding="async"><% } else { %><div class="f-product-image-placeholder"><span>FORME</span></div><% } %></a></div><div class="f-product-info"><div class="f-product-title-row"><h3><a href="/products/<%= encodeURIComponent(slug) %>" style="color:inherit;text-decoration:none"><%= card.name %></a></h3><p class="f-product-price"><%= formatMoney(card.price) %></p></div><p class="f-product-meta"><%= card.categoryName || '' %></p></div></article>

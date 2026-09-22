@@ -1,0 +1,15 @@
+<%
+  const cats = Array.isArray(categories) ? categories : [];
+%>
+<footer class="f-footer" data-section="footer"><div class="f-container">
+  <div class="f-footer-top">
+    <div class="f-footer-brand"><a class="f-brand-lockup f-brand-lockup--footer" href="/"><span class="f-brand-copy"><span class="f-logo f-brand-name">FORME</span></span></a><p>A considered wardrobe.<br>A world of possibilities.</p></div>
+    <nav aria-label="Footer shop navigation"><h2 class="f-footer-title">Shop</h2><ul class="f-footer-links"><li><a href="/products">All Products</a></li><% cats.slice(0,5).forEach(category => { %><li><a href="/products?category=<%= encodeURIComponent(category.slug) %>"><%= category.name %></a></li><% }) %></ul></nav>
+    <nav aria-label="Footer navigation"><h2 class="f-footer-title">Information</h2><ul class="f-footer-links"><li><a href="/">Home</a></li><li><a href="/cart">Shopping Bag</a></li><li><a href="/checkout">Checkout</a></li></ul></nav>
+    <div class="f-footer-closing"><h2 class="f-footer-title">Your next favorite</h2><p>Good style starts with something that feels like you.</p><a href="/products" class="f-text-link">Find it here <span class="f-link-arrow" aria-hidden="true"></span></a></div>
+  </div>
+  <div class="f-footer-wordmark" aria-hidden="true">FORME</div>
+  <div class="f-footer-bottom"><p>© <%= new Date().getFullYear() %> FORME. A point of view.</p><p>Lite Edition / New perspectives</p><a href="#top">Back to top <span class="f-link-arrow f-link-arrow--up" aria-hidden="true"></span></a></div>
+</div></footer>
+<script src="/js/cartManager.js?v=<%= assetVersion %>"></script>
+<script src="/js/formeGlobal.js?v=<%= assetVersion %>"></script>

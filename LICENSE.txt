@@ -1,0 +1,62 @@
+FORME Lite Community Source License
+Version 1.0 — 2026
+
+Copyright (c) 2026. All rights reserved except as expressly granted below.
+
+This license applies only to the FORME Lite / Community Edition in this
+repository. It does not apply to any paid, Pro, Full, marketplace, private, or
+commercial edition of FORME or StorefrontCMS.
+
+1. Permission
+
+You may:
+- View and study the source code.
+- Download and run the Lite Edition locally.
+- Modify the Lite Edition for personal, educational, portfolio, testing, and
+  evaluation purposes.
+- Create public forks of the Lite Edition, provided this license and the
+  original copyright notice remain included.
+- Share links to the original repository or to a compliant public fork.
+
+2. Restrictions
+
+You may not, without a separate commercial license:
+- Sell, license, sublicense, rent, or commercially redistribute the Lite Edition.
+- Sell a modified copy of the Lite Edition as a template, CMS, starter kit,
+  boilerplate, source-code product, or similar digital product.
+- Use the Lite Edition as the source code for paid client work or a commercial
+  production store.
+- Remove this license or represent the original FORME Lite source as your own
+  original product.
+- Copy or redistribute source code, assets, features, or files from any paid,
+  Pro, Full, marketplace, or private edition that are not already included in
+  this Lite repository.
+
+3. Commercial use
+
+Commercial production use, paid client use, resale rights, and access to the
+Full/Pro feature set require a separate commercial license from the copyright
+holder.
+
+4. Contributions and forks
+
+Public forks and non-commercial modifications are allowed under this same
+license. A fork must retain this license and must not imply endorsement by the
+original author.
+
+5. Third-party software
+
+Third-party packages and libraries remain subject to their own licenses. This
+license does not replace or expand rights granted by those third parties.
+
+6. No warranty
+
+The software is provided "as is", without warranty of any kind. You are
+responsible for testing, security, backups, deployment configuration, legal
+compliance, and any use of the software.
+
+7. Paid editions
+
+The Lite Edition intentionally contains fewer features than the paid editions.
+This license does not grant access to, redistribution rights for, or ownership
+of paid-edition source code or features.

@@ -1,0 +1,8 @@
+<%
+  const card = cardProduct;
+  const images = Array.isArray(card.images) ? card.images.filter(Boolean) : [];
+  const primaryImage = images[0] || '';
+  const secondaryImage = images[1] || '';
+  const cardUrl = `/products/${encodeURIComponent(card.slug || '')}`;
+%>
+<article class="f-product <%= secondaryImage ? 'f-product--has-secondary' : '' %>"><div class="f-product-media"><a class="f-product-media-link" href="<%= cardUrl %>" aria-label="View <%= card.name %>"><% if (primaryImage) { %><img class="f-product-image--primary" src="<%= responsiveImageUrl(primaryImage, 900) %>" alt="<%= card.name %>" loading="lazy" decoding="async"><% } else { %><div class="f-product-image-placeholder" aria-hidden="true"><span>FORME</span></div><% } %><% if (secondaryImage) { %><img class="f-product-image--secondary" src="<%= responsiveImageUrl(secondaryImage, 900) %>" alt="" aria-hidden="true" loading="lazy" decoding="async"><% } %></a><a class="f-quick-add" href="<%= cardUrl %>">View Piece <span aria-hidden="true">+</span></a></div><div class="f-product-info"><div class="f-product-title-row"><h3><a class="f-product-title-link" href="<%= cardUrl %>"><%= card.name %></a></h3><div class="f-price-group"><span class="f-product-price"><%= formatMoney(card.price) %></span></div></div><p class="f-product-meta"><%= card.categoryName || '' %></p><p class="f-product-variants"><%= Number(card.stock || 0) > 0 ? `${card.stock} in stock` : 'Out of stock' %></p></div></article>

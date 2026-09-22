@@ -1,0 +1,197 @@
+/* FORME theme contract. Change tokens here, or let the CMS override them.
+   Brand: editorial | minimal | street | luxury. Mode: light | dark | auto.
+   Per-section colors, image positions and product swatches can use inline tokens. */
+
+:root {
+  color-scheme: light;
+  --f-primary: #20221f;
+  --f-secondary: #414840;
+  --f-accent: #793c30;
+  --f-light-background: #fcfcfa;
+  --f-light-surface: #f0f1ed;
+  --f-light-raised: #ffffff;
+  --f-light-text: #20221f;
+  --f-light-muted: #63675f;
+  --f-light-border: #d5d8d0;
+  --f-dark-background: #151715;
+  --f-dark-surface: #222522;
+  --f-dark-raised: #2b2f2a;
+  --f-dark-text: #f3f4ee;
+  --f-dark-muted: #b8bdb2;
+  --f-dark-border: #444940;
+  --f-dark-accent: #e5ac98;
+  --f-background: var(--f-light-background);
+  --f-surface: var(--f-light-surface);
+  --f-raised: var(--f-light-raised);
+  --f-text: var(--f-light-text);
+  --f-muted: var(--f-light-muted);
+  --f-border: var(--f-light-border);
+  --f-button-background: var(--f-text);
+  --f-button-text: var(--f-background);
+  --f-button-hover: var(--f-secondary);
+  --f-button-hover-text: #ffffff;
+  --f-announcement-background: var(--f-primary);
+  --f-announcement-text: #ffffff;
+  --f-footer-background: #20251f;
+  --f-footer-text: #f6f7f0;
+  --f-footer-muted: #c2c7ba;
+  --f-footer-border: #51574c;
+  --f-image-text: #ffffff;
+  --f-image-overlay: 0.63;
+  --f-image-overlay-mobile: 0.78;
+  --f-banner-overlay: 0.48;
+  --f-image-button-background: #ffffff;
+  --f-image-button-text: #20221f;
+  --f-badge-background: var(--f-raised);
+  --f-badge-text: var(--f-text);
+  --f-focus: #a74728;
+  --f-font-body: Arial, Helvetica, sans-serif;
+  --f-font-display: Arial, Helvetica, sans-serif;
+  --f-font-editorial: Georgia, 'Times New Roman', serif;
+  --f-font-logo: Arial, Helvetica, sans-serif;
+  --f-display-weight: 500;
+  --f-display-tracking: -0.055em;
+  --f-logo-tracking: -0.07em;
+  --f-label-tracking: 0.14em;
+  --f-button-tracking: 0;
+  --f-button-transform: none;
+  --f-radius: 0px;
+  --f-button-radius: 0px;
+  --f-card-radius: var(--f-radius);
+  --f-badge-radius: 0px;
+  --f-border-width: 1px;
+  --f-content-width: 1440px;
+  --f-gutter: clamp(1.25rem, 4.4vw, 5rem);
+  --f-section-space: clamp(4.5rem, 8vw, 8rem);
+  --f-grid-gap: clamp(0.8rem, 1.8vw, 1.75rem);
+  --f-hero-size: clamp(3.6rem, 7.7vw, 8.6rem);
+  --f-heading-size: clamp(2.5rem, 4.4vw, 4.8rem);
+  --f-product-ratio: 4 / 5;
+  --f-image-fit: cover;
+  --f-image-position: center;
+  --f-transition: 240ms;
+  --f-control-background: var(--f-background);
+  --f-control-radius: var(--f-radius);
+  --f-gallery-gap: var(--f-grid-gap);
+  --f-sale-price: var(--f-accent);
+  --f-sale-badge-background: var(--f-text);
+  --f-sale-badge-text: var(--f-background);
+  --f-accent-badge-background: var(--f-primary);
+  --f-accent-badge-text: #ffffff;
+  --f-floating-control-background: rgb(255 255 255 / 0.88);
+  --f-floating-control-text: #20221f;
+  --f-quick-add-background: rgb(255 255 255 / 0.94);
+  --f-quick-add-text: #20221f;
+  --f-quick-add-border: rgb(32 34 31 / 0.18);
+  --f-stock-color: #3f6b49;
+  --f-stock-halo: rgb(63 107 73 / 0.14);
+}
+
+/* Brand presets alter identity without changing a component or its markup. */
+:root[data-brand='minimal'] {
+  --f-light-background: #ffffff;
+  --f-light-surface: #f4f4f4;
+  --f-light-text: #171717;
+  --f-light-muted: #666666;
+  --f-light-border: #dddddd;
+  --f-primary: #171717;
+  --f-secondary: #454545;
+  --f-accent: #171717;
+  --f-font-editorial: Arial, Helvetica, sans-serif;
+  --f-display-tracking: -0.055em;
+  --f-footer-background: #111111;
+  --f-footer-text: #ffffff;
+  --f-footer-muted: #c4c4c4;
+  --f-footer-border: #4a4a4a;
+}
+
+:root[data-brand='street'] {
+  --f-primary: #263acb;
+  --f-secondary: #142595;
+  --f-accent: #263acb;
+  --f-dark-accent: #b8c1ff;
+  --f-light-background: #f8f9ff;
+  --f-light-surface: #e8ebf7;
+  --f-light-text: #141830;
+  --f-light-muted: #575e78;
+  --f-light-border: #cdd2e5;
+  --f-dark-background: #111329;
+  --f-dark-surface: #1d2240;
+  --f-dark-raised: #2a3053;
+  --f-dark-text: #f2f4ff;
+  --f-dark-muted: #bdc4e5;
+  --f-dark-border: #4b557b;
+  --f-font-display: 'Arial Black', Arial, sans-serif;
+  --f-font-editorial: 'Arial Black', Arial, sans-serif;
+  --f-display-weight: 900;
+  --f-display-tracking: -0.06em;
+  --f-button-background: var(--f-primary);
+  --f-button-text: #ffffff;
+  --f-button-transform: uppercase;
+  --f-button-tracking: 0.055em;
+  --f-button-radius: 999px;
+  --f-card-radius: 0.6rem;
+  --f-badge-radius: 999px;
+  --f-footer-background: #142595;
+  --f-footer-text: #ffffff;
+  --f-footer-muted: #d4dbff;
+  --f-footer-border: #6877d1;
+}
+
+:root[data-brand='luxury'] {
+  --f-primary: #342823;
+  --f-secondary: #534139;
+  --f-accent: #765622;
+  --f-dark-accent: #d8ba86;
+  --f-light-background: #faf8f3;
+  --f-light-surface: #efebe2;
+  --f-light-text: #302821;
+  --f-light-muted: #72665b;
+  --f-light-border: #d5ccbc;
+  --f-dark-background: #1c1815;
+  --f-dark-surface: #29231e;
+  --f-dark-raised: #352e27;
+  --f-dark-text: #f6eddf;
+  --f-dark-muted: #cbbda9;
+  --f-dark-border: #5d5041;
+  --f-font-display: Georgia, 'Times New Roman', serif;
+  --f-font-logo: Georgia, 'Times New Roman', serif;
+  --f-display-weight: 400;
+  --f-display-tracking: -0.045em;
+  --f-logo-tracking: -0.06em;
+  --f-label-tracking: 0.2em;
+  --f-button-transform: uppercase;
+  --f-button-tracking: 0.09em;
+  --f-section-space: clamp(5rem, 9vw, 9rem);
+  --f-footer-background: #302821;
+  --f-footer-text: #faf2e5;
+  --f-footer-muted: #d0c1ad;
+  --f-footer-border: #75634f;
+}
+
+/* Mode overrides follow brand presets, preserving the selected brand palette. */
+:root[data-mode='dark'] {
+  color-scheme: dark;
+  --f-background: var(--f-dark-background);
+  --f-surface: var(--f-dark-surface);
+  --f-raised: var(--f-dark-raised);
+  --f-text: var(--f-dark-text);
+  --f-muted: var(--f-dark-muted);
+  --f-border: var(--f-dark-border);
+  --f-accent: var(--f-dark-accent);
+  --f-focus: #e9bc76;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-mode='auto'] {
+    color-scheme: dark;
+    --f-background: var(--f-dark-background);
+    --f-surface: var(--f-dark-surface);
+    --f-raised: var(--f-dark-raised);
+    --f-text: var(--f-dark-text);
+    --f-muted: var(--f-dark-muted);
+    --f-border: var(--f-dark-border);
+    --f-accent: var(--f-dark-accent);
+    --f-focus: #e9bc76;
+  }
+}

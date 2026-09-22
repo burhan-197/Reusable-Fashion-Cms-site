@@ -1,0 +1,35 @@
+/* CMS-only social controls added to the original FORME footer.
+   The footer layout itself remains the original FORME .f-footer design. */
+.f-footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+  margin-top: 1.35rem;
+}
+.f-footer-socials a {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: var(--f-border-width) solid var(--f-footer-border);
+  border-radius: 50%;
+  color: var(--f-footer-text);
+  font-size: .78rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+@media (hover:hover) {
+  .f-footer-socials a:hover {
+    background: var(--f-footer-text);
+    border-color: var(--f-footer-text);
+    color: var(--f-footer-background);
+  }
+}
+
+/* CMS-controlled WhatsApp shortcut, kept visually separate from FORME content. */
+.f-wa-float{position:fixed;right:20px;bottom:20px;z-index:260;display:flex;align-items:center;gap:10px;text-decoration:none}
+.f-wa-float__label{background:var(--f-surface);color:var(--f-text);border:1px solid var(--f-border);box-shadow:0 8px 24px rgba(0,0,0,.12);padding:10px 12px;font-size:.76rem;white-space:nowrap}
+.f-wa-float__icon{width:52px;height:52px;border-radius:50%;background:#25d366;color:#fff;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.2);transition:transform .2s ease}
+.f-wa-float:hover .f-wa-float__icon{transform:translateY(-2px)}
+@media(max-width:640px){.f-wa-float{right:14px;bottom:14px}.f-wa-float__label{display:none}.f-wa-float__icon{width:48px;height:48px}}

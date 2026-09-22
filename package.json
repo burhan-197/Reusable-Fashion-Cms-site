@@ -1,0 +1,25 @@
+{
+  "name": "forme-fashion-store-lite",
+  "version": "1.0.0",
+  "description": "Lite reusable Node.js fashion eCommerce store with basic catalog, cart, COD checkout and order management.",
+  "private": true,
+  "engines": { "node": ">=20.19.0" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check controllers/storefrontController.js && node --check controllers/orderController.js && node --check controllers/adminProductController.js"
+  },
+  "dependencies": {
+    "compression": "^1.8.1",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-rate-limit": "^6.7.0",
+    "express-session": "^1.19.0",
+    "helmet": "^7.0.0",
+    "mongoose": "^9.9.5",
+    "multer": "2.3.0",
+    "sharp": "^0.35.4"
+  }
+}

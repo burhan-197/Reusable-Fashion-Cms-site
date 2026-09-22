@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-brand="editorial" data-mode="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= metaDescription %>"><meta name="theme-color" content="#20221f">
+  <title><%= pageTitle %></title><%- include('../partials/forme/seo') %>
+  <link rel="stylesheet" href="/css/forme/theme.css">
+  <link rel="stylesheet" href="/css/forme/styles.css">
+  <link rel="stylesheet" href="/css/forme/catalog.css">
+  <link rel="stylesheet" href="/css/forme/content-pages.css">
+  <link rel="stylesheet" href="/css/forme/commerce.css">
+  <link rel="stylesheet" href="/css/forme/cms-footer.css">
+  <%- include('../partials/forme/theme-settings') %>
+</head>
+<body class="storefront" data-cms-storefront="forme" id="top" data-currency-code="USD" data-currency-symbol="$" data-currency-position="before">
+  <a class="f-skip-link" href="#main">Skip to content</a>
+  <%- include('../partials/forme/header', { active: 'cart' }) %>
+  <%- include('../partials/forme/search-overlay') %>
+  <main id="main">
+    <nav class="f-breadcrumbs" aria-label="Breadcrumb"><div class="f-container"><ol><li><a href="/">Home</a></li><li><a href="/cart">Bag</a></li><li aria-current="page">Checkout</li></ol></div></nav>
+    <section class="f-commerce-head"><div class="f-container f-commerce-head__inner"><div><p class="f-eyebrow">GUEST CHECKOUT</p><h1 class="f-commerce-title">Complete your order</h1></div><p class="f-commerce-intro">Add your delivery information and review your order.</p></div></section>
+    <section class="f-checkout"><div class="f-container f-checkout-layout">
+      <form class="f-checkout-form" id="checkoutForm">
+        <input type="hidden" id="csrfToken" value="<%= csrfToken %>">
+        <section class="f-checkout-section"><h2>Customer Information</h2><div class="f-checkout-fields">
+          <div class="f-field"><label>First name <span>*</span></label><input name="firstName" autocomplete="given-name" maxlength="80" required></div>
+          <div class="f-field"><label>Last name <span>*</span></label><input name="lastName" autocomplete="family-name" maxlength="80" required></div>
+          <div class="f-field"><label>Email <span>(Optional)</span></label><input name="email" type="email" autocomplete="email" maxlength="254"></div>
+          <div class="f-field"><label>Phone <span>*</span></label><input name="phone" type="tel" autocomplete="tel" maxlength="40" required></div>
+        </div></section>
+
+        <section class="f-checkout-section"><h2>Shipping Address</h2><div class="f-checkout-fields">
+          <div class="f-field f-field--full"><label>Address <span>*</span></label><input name="address" autocomplete="street-address" maxlength="500" required></div>
+          <div class="f-field"><label>City <span>*</span></label><input name="city" autocomplete="address-level2" maxlength="100" required></div>
+          <div class="f-field"><label>Postal code <span>(Optional)</span></label><input name="postalCode" autocomplete="postal-code" maxlength="30"></div>
+        </div></section>
+
+        <section class="f-checkout-section"><h2>Order Note</h2><div class="f-field"><label>Instructions <span>(Optional)</span></label><textarea name="notes" maxlength="1000" placeholder="Delivery note or other order details"></textarea></div></section>
+
+        <section class="f-checkout-section"><h2>Payment</h2><div class="f-checkout-option-list payment-methods">
+          <label class="f-checkout-option"><input type="radio" name="paymentMethod" value="cod" checked><span><strong>Cash on Delivery</strong><span>Pay when your order is delivered.</span></span></label>
+          <label class="f-checkout-option"><input type="radio" name="paymentMethod" value="manual"><span><strong>Manual Payment</strong><span>Place the order and arrange payment directly with the store.</span></span></label>
+        </div></section>
+
+        <div class="f-form-status is-error" id="checkoutError" role="alert" aria-live="polite" hidden></div>
+        <button class="f-button place-order-btn" id="placeOrderButton" type="submit">Place Order</button>
+        <p class="f-form-note">No customer account or online payment is required in the Lite edition.</p>
+      </form>
+
+      <aside class="f-order-summary"><h2>Order Summary</h2><div id="checkoutSummaryItems"></div><div class="f-summary-lines"><div class="f-summary-line"><span>Subtotal</span><span id="checkoutSubtotal"><%= formatMoney(0) %></span></div><div class="f-summary-line"><span>Shipping</span><span>Free</span></div><div class="f-summary-line f-summary-line--total"><span>Total</span><span id="checkoutTotal"><%= formatMoney(0) %></span></div></div></aside>
+    </div></section>
+  </main>
+  <%- include('../partials/forme/footer') %>
+  <script src="/js/currency.js?v=<%= assetVersion %>"></script>
+  <script src="/js/checkoutLite.js?v=<%= assetVersion %>"></script>
+</body></html>

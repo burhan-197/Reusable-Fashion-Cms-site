@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-brand="editorial" data-mode="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= metaDescription %>"><meta name="theme-color" content="#20221f">
+  <title><%= pageTitle %></title><%- include('../partials/forme/seo') %>
+  <link rel="stylesheet" href="/css/forme/theme.css">
+  <link rel="stylesheet" href="/css/forme/styles.css">
+  <link rel="stylesheet" href="/css/forme/catalog.css">
+  <link rel="stylesheet" href="/css/forme/content-pages.css">
+  <link rel="stylesheet" href="/css/forme/commerce.css">
+  <link rel="stylesheet" href="/css/forme/cms-footer.css">
+  <%- include('../partials/forme/theme-settings') %>
+</head>
+<body class="storefront" data-cms-storefront="forme" id="top"
+  data-currency-code="USD" data-currency-symbol="$" data-currency-position="before"
+  data-shipping-enabled="false" data-shipping-flat-enabled="false" data-shipping-flat-rate="0"
+  data-shipping-free-enabled="false" data-shipping-free-threshold="0">
+  <a class="f-skip-link" href="#main">Skip to content</a>
+  <%- include('../partials/forme/header', { active: 'cart' }) %>
+  <%- include('../partials/forme/search-overlay') %>
+  <main id="main" class="f-commerce-page">
+    <nav class="f-breadcrumbs" aria-label="Breadcrumb"><div class="f-container"><ol><li><a href="/">Home</a></li><li aria-current="page">Bag</li></ol></div></nav>
+    <section class="f-commerce-head"><div class="f-container f-commerce-head__inner"><div><p class="f-eyebrow">YOUR BAG</p><h1 class="f-commerce-title">Your shopping bag</h1></div><p class="f-commerce-intro">Review your selected pieces before checkout.</p></div></section>
+    <section class="f-commerce-main"><div class="f-container f-commerce-grid">
+      <div class="f-cart-column">
+        <div class="f-cart-list cart-items" aria-label="Cart items" data-empty-heading="Your bag is empty" data-empty-description="Explore the collection and add the pieces that feel right." data-empty-button-label="Shop the collection"><div class="f-cart-loading">Loading your bag…</div></div>
+        <div class="f-cart-under-list"><span class="cart-item-count">0 items</span><a class="f-text-link" href="/products">Continue Shopping <span class="f-link-arrow" aria-hidden="true"></span></a></div>
+      </div>
+      <aside class="f-order-summary cart-summary" aria-labelledby="cart-summary-title">
+        <h2 id="cart-summary-title">Order Summary</h2>
+        <div class="f-summary-lines"><div class="f-summary-line"><span>Subtotal</span><span class="subtotal-amount"><%= formatMoney(0) %></span></div><div class="f-summary-line"><span>Shipping</span><span class="shipping-amount">Free</span></div><div class="f-summary-line f-summary-line--total"><span>Estimated total</span><span class="total-amount"><%= formatMoney(0) %></span></div></div>
+        <a class="f-button f-summary-cta checkout-btn" href="/checkout">Continue to Checkout <span class="f-link-arrow" aria-hidden="true"></span></a>
+        <p class="f-summary-secondary">Simple guest checkout</p>
+        <div class="f-commerce-assurances"><div class="f-commerce-assurance"><strong>Guest checkout</strong><span>No customer account required.</span></div><div class="f-commerce-assurance"><strong>Payment</strong><span>Cash on delivery or manual arrangement.</span></div><div class="f-commerce-assurance"><strong>Inventory</strong><span>Stock is validated when the order is placed.</span></div></div>
+      </aside>
+    </div></section>
+  </main>
+  <%- include('../partials/forme/footer') %>
+  <script src="/js/currency.js?v=<%= assetVersion %>"></script>
+  <script src="/js/cart-page-forme.js?v=<%= assetVersion %>"></script>
+</body></html>

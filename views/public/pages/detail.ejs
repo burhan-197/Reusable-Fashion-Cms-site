@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-brand="editorial" data-mode="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= metaDescription %>">
+  <meta name="theme-color" content="#20221f">
+  <title><%= pageTitle %></title>
+  <%- include('../partials/forme/seo') %>
+  <% if (product.images?.[0]) { %><link rel="preload" href="<%= responsiveImageUrl(product.images[0], 1200) %>" as="image" fetchpriority="high"><% } %>
+  <link rel="stylesheet" href="/css/forme/theme.css">
+  <link rel="stylesheet" href="/css/forme/styles.css">
+  <link rel="stylesheet" href="/css/forme/catalog.css">
+  <link rel="stylesheet" href="/css/forme/commerce.css">
+  <link rel="stylesheet" href="/css/forme/cms-footer.css">
+  <%- include('../partials/forme/theme-settings') %>
+</head>
+<body class="storefront" data-cms-storefront="forme" id="top" data-currency-code="USD" data-currency-symbol="$" data-currency-position="before">
+  <a class="f-skip-link" href="#main">Skip to content</a>
+  <%- include('../partials/forme/header', { active: 'products' }) %>
+  <%- include('../partials/forme/search-overlay') %>
+  <% const galleryImages = Array.isArray(product.images) ? product.images.filter(Boolean) : []; %>
+
+  <main id="main" class="f-page-shell">
+    <nav class="f-breadcrumbs" aria-label="Breadcrumb"><div class="f-container"><ol><li><a href="/">Home</a></li><li><a href="/products">Shop</a></li><% if(product.categorySlug){ %><li><a href="/products?category=<%= encodeURIComponent(product.categorySlug) %>"><%= product.categoryName %></a></li><% } %><li aria-current="page"><%= product.name %></li></ol></div></nav>
+
+    <section class="f-container f-pdp" aria-labelledby="product-title">
+      <div class="f-pdp-layout">
+        <div class="f-product-gallery" id="formeProductGallery" aria-label="Product image gallery">
+          <% if (galleryImages.length) { %>
+            <div class="f-pdp-viewer">
+              <figure class="f-pdp-image f-pdp-image--primary" id="formeMainImageFrame"><img id="formeMainImage" src="<%= responsiveImageUrl(galleryImages[0], 1400) %>" width="1122" height="1402" alt="<%= product.name %>" fetchpriority="high" decoding="async"></figure>
+              <% if (galleryImages.length > 1) { %><button class="f-gallery-nav f-gallery-nav--prev" id="formeGalleryPrev" type="button" aria-label="Previous product image"><span aria-hidden="true"></span></button><button class="f-gallery-nav f-gallery-nav--next" id="formeGalleryNext" type="button" aria-label="Next product image"><span aria-hidden="true"></span></button><% } %>
+            </div>
+            <% if (galleryImages.length > 1) { %><div class="f-gallery-thumbs" id="formeGalleryThumbs" role="list" aria-label="Product image thumbnails"><% galleryImages.forEach((image,index)=>{ %><button class="f-gallery-thumb <%= index===0?'is-active':'' %>" type="button" data-gallery-index="<%= index %>" data-gallery-src="<%= responsiveImageUrl(image, 1400) %>" data-gallery-alt="<%= product.name %> image <%= index+1 %>" aria-current="<%= index===0?'true':'false' %>"><img src="<%= responsiveImageUrl(image, 220) %>" width="96" height="120" alt="" loading="lazy" decoding="async"></button><% }) %></div><% } %>
+          <% } else { %><div class="f-pdp-viewer"><figure class="f-pdp-image f-pdp-image--primary f-product-image-placeholder"><span>FORME</span></figure></div><% } %>
+        </div>
+
+        <aside class="f-pdp-summary" aria-label="Product purchase information">
+          <p class="f-eyebrow"><%= product.categoryName || 'Collection' %></p>
+          <h1 class="f-pdp-title" id="product-title"><%= product.name %></h1>
+          <p class="f-pdp-price"><span class="f-product-price"><%= formatMoney(product.price) %></span></p>
+          <p class="f-pdp-description"><%= product.description %></p>
+          <p class="f-stock-line <%= product.stock>0?'is-in-stock':'is-out' %>" id="formeStockLine"><span class="f-stock-dot" aria-hidden="true"></span><%= product.stock>0 ? `${product.stock} in stock` : 'Currently unavailable' %></p>
+
+          <div class="f-purchase-row">
+            <div class="f-quantity"><label for="quantity">Quantity</label><input id="quantity" name="quantity" type="number" min="1" max="<%= Math.max(1,product.stock) %>" value="1" inputmode="numeric" <%= product.stock<1?'disabled':'' %>></div>
+            <button type="button" class="f-button f-add-to-bag" id="formeAddToBag" <%= product.stock<1?'disabled':'' %>>Add to Bag <span class="f-link-arrow" aria-hidden="true"></span></button>
+          </div>
+          <button type="button" class="f-button f-buy-now" id="formeBuyNow" <%= product.stock<1?'disabled':'' %>>Buy Now <span class="f-link-arrow" aria-hidden="true"></span></button>
+          <p class="f-form-status" id="formeAddStatus" aria-live="polite"></p>
+
+          <div class="f-service-list" aria-label="Store highlights"><p class="f-service-item"><strong>Payment</strong><span>Cash on delivery or manual order arrangement</span></p><p class="f-service-item"><strong>Stock</strong><span>Inventory is reduced when an order is placed</span></p></div>
+
+          <div class="f-product-accordions"><details class="f-product-detail" open><summary>Product Description</summary><div class="f-product-detail-content"><p class="f-product-info-copy"><%= product.description %></p></div></details></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div id="formeLiteProductData" hidden
+    data-id="<%= product._id %>"
+    data-name="<%= product.name %>"
+    data-price="<%= product.price %>"
+    data-stock="<%= product.stock %>"
+    data-image="<%= product.images?.[0] || '' %>"
+    data-slug="<%= product.slug %>"
+    data-category="<%= product.categoryName || '' %>"></div>
+  <%- include('../partials/forme/footer') %>
+  <script src="/js/currency.js?v=<%= assetVersion %>"></script>
+  <script src="/js/formeProductLite.js?v=<%= assetVersion %>"></script>
+</body>
+</html>

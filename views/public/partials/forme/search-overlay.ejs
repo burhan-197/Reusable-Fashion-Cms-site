@@ -1,0 +1,14 @@
+<%
+  const cats = Array.isArray(categories) ? categories : [];
+%>
+<section class="f-search-overlay" id="site-search" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <div class="f-search-wrap">
+    <div class="f-search-top"><a class="f-search-brand" href="/">FORME</a><a class="f-search-close" href="#" aria-label="Close search">×</a></div>
+    <div class="f-search-body">
+      <p class="f-eyebrow">Search the store</p>
+      <h2 class="f-search-heading" id="site-search-title">What are you <em>looking for?</em></h2>
+      <form class="f-search-form" action="/products" method="get" role="search"><label class="f-sr-only" for="site-search-input">Search products</label><input id="site-search-input" name="q" type="search" placeholder="Search pieces…" autocomplete="off"><button class="f-search-submit" type="submit" aria-label="Submit search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg></button></form>
+      <div class="f-search-support"><div><h2>Popular searches</h2><div class="f-search-links"><a href="/products">New arrivals</a><a href="/products">Everyday layers</a><a href="/products">Relaxed essentials</a></div></div><div><h2>Categories</h2><div class="f-search-links"><% if (cats.length) { cats.slice(0,6).forEach(category => { %><a href="/products?category=<%= encodeURIComponent(category.slug) %>"><%= category.name %></a><% }) } else { %><a href="/products">All Products</a><% } %></div></div></div>
+    </div>
+  </div>
+</section>

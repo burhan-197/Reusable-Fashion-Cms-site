@@ -1,0 +1,9 @@
+const Category = require('../models/Category');
+const Product = require('../models/Product');
+const { slugify, cleanText } = require('../utils/text');
+async function uniqueSlug(name, ignoreId=null){const base=slugify(name)||`category-${Date.now()}`;let slug=base,n=2;while(await Category.exists({slug,...(ignoreId?{_id:{$ne:ignoreId}}:{})}))slug=`${base}-${n++}`;return slug;}
+async function page(req,res,next){try{const categories=await Category.find().sort({name:1}).lean();const counts=await Product.aggregate([{$group:{_id:'$category',count:{$sum:1}}}]);const map=new Map(counts.map(x=>[String(x._id),x.count]));res.render('admin/categories',{categories:categories.map(c=>({...c,productCount:map.get(String(c._id))||0})),error:String(req.query.error||'')});}catch(e){next(e);}}
+async function create(req,res,next){try{const name=cleanText(req.body.name,80);if(!name)return res.redirect('/admin/categories?error='+encodeURIComponent('Category name is required.'));await Category.create({name,slug:await uniqueSlug(name)});res.redirect('/admin/categories');}catch(e){next(e);}}
+async function update(req,res,next){try{const name=cleanText(req.body.name,80);if(!name)return res.redirect('/admin/categories?error='+encodeURIComponent('Category name is required.'));const category=await Category.findById(req.params.id);if(!category)return res.status(404).send('Category not found.');category.name=name;category.slug=await uniqueSlug(name,category._id);await category.save();res.redirect('/admin/categories');}catch(e){next(e);}}
+async function remove(req,res,next){try{if(await Product.exists({category:req.params.id}))return res.redirect('/admin/categories?error='+encodeURIComponent('Move or delete products in this category first.'));await Category.findByIdAndDelete(req.params.id);res.redirect('/admin/categories');}catch(e){next(e);}}
+module.exports={page,create,update,remove};

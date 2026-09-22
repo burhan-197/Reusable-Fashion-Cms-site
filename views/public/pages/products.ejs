@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" data-brand="editorial" data-mode="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= metaDescription %>">
+  <meta name="theme-color" content="#20221f">
+  <title><%= pageTitle %></title>
+  <%- include('../partials/forme/seo') %>
+  <link rel="stylesheet" href="/css/forme/theme.css">
+  <link rel="stylesheet" href="/css/forme/styles.css">
+  <link rel="stylesheet" href="/css/forme/catalog.css">
+  <link rel="stylesheet" href="/css/forme/commerce.css">
+  <link rel="stylesheet" href="/css/forme/cms-footer.css">
+  <%- include('../partials/forme/theme-settings') %>
+</head>
+<body class="storefront" data-cms-storefront="forme" id="top" data-currency-code="USD" data-currency-symbol="$" data-currency-position="before">
+  <a class="f-skip-link" href="#main">Skip to content</a>
+  <%- include('../partials/forme/header', { active: 'products' }) %>
+  <%- include('../partials/forme/search-overlay') %>
+
+  <% const categoryTitle = selectedCategory?.name || (searchQuery ? `Search: ${searchQuery}` : 'All Pieces'); %>
+  <main id="main" class="f-page-shell">
+    <nav class="f-breadcrumbs" aria-label="Breadcrumb"><div class="f-container"><ol><li><a href="/">Home</a></li><li aria-current="page"><%= categoryTitle %></li></ol></div></nav>
+
+    <section class="f-container f-page-intro" aria-labelledby="shop-title">
+      <div class="f-page-intro-grid"><div><p class="f-eyebrow"><%= selectedCategory ? 'Category' : 'Collection 01 / The full edit' %></p><h1 id="shop-title" class="f-page-title"><%= categoryTitle %></h1></div><p class="f-page-intro-copy"><%= selectedCategory?.description || 'A considered wardrobe built around ease, proportion and everyday wear.' %></p></div>
+    </section>
+
+    <nav class="f-collection-tabs" aria-label="Shop categories"><div class="f-container"><ul>
+      <li><a href="/products" <%= !selectedCategory ? 'aria-current="page"' : '' %>>All Pieces</a></li>
+      <% categories.forEach(category => { %><li><a href="/products?category=<%= encodeURIComponent(category.slug) %>" <%= selectedCategory?.slug === category.slug ? 'aria-current="page"' : '' %>><%= category.name %></a></li><% }) %>
+    </ul></div></nav>
+
+    <section class="f-container f-shop" id="shop-grid" aria-labelledby="shop-results-title">
+      <div class="f-shop-toolbar"><p class="f-product-count" id="shop-results-title"><%= totalProducts %> <%= totalProducts === 1 ? 'style' : 'styles' %></p><form class="f-shop-actions" method="get" action="/products">
+        <% if (searchQuery) { %><input type="hidden" name="q" value="<%= searchQuery %>"><% } %>
+        <% if (selectedCategory) { %><input type="hidden" name="category" value="<%= selectedCategory.slug %>"><% } %>
+        <div class="f-sort"><label for="sort-products">Sort by</label><select id="sort-products" name="sort" onchange="this.form.submit()"><option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>Newest</option><option value="price-asc" <%= sort === 'price-asc' ? 'selected' : '' %>>Price: Low to High</option><option value="price-desc" <%= sort === 'price-desc' ? 'selected' : '' %>>Price: High to Low</option></select></div>
+      </form></div>
+
+      <details class="f-mobile-filter-toggle"><summary>Filter the collection <span class="f-product-count"><%= totalProducts %></span></summary><div class="f-mobile-filter-panel">
+        <form method="get" action="/products" class="f-catalog-filter-form">
+          <details class="f-filter-group" open><summary>Search</summary><div class="f-filter-options"><input class="f-lite-filter-input" type="search" name="q" value="<%= searchQuery %>" placeholder="Search products"></div></details>
+          <details class="f-filter-group" open><summary>Category</summary><div class="f-filter-options"><a class="f-filter-category-link <%= !selectedCategory ? 'is-active' : '' %>" href="/products"><span class="f-filter-category-name">All products</span><span class="f-filter-count"><%= totalProducts %></span></a><% categories.forEach(category => { %><a class="f-filter-category-link <%= selectedCategory?.slug===category.slug ? 'is-active' : '' %>" href="/products?category=<%= encodeURIComponent(category.slug) %>"><span class="f-filter-category-name"><%= category.name %></span><span class="f-filter-count"><%= categorySummary[category.slug] || 0 %></span></a><% }) %></div></details>
+          <button class="f-button f-button--outline f-filter-apply" type="submit">Apply filters</button>
+        </form>
+      </div></details>
+
+      <div class="f-shop-layout">
+        <aside class="f-filters" aria-label="Product filters"><div class="f-filter-heading"><h2>Filter</h2><a class="f-filter-clear" href="/products">Clear</a></div><form method="get" action="/products" class="f-catalog-filter-form">
+          <details class="f-filter-group" open><summary>Search</summary><div class="f-filter-options"><input class="f-lite-filter-input" type="search" name="q" value="<%= searchQuery %>" placeholder="Search products"></div></details>
+          <details class="f-filter-group" open><summary>Category</summary><div class="f-filter-options"><a class="f-filter-category-link <%= !selectedCategory ? 'is-active' : '' %>" href="/products"><span class="f-filter-category-name">All products</span><span class="f-filter-count"><%= Object.values(categorySummary).reduce((a,b)=>a+b,0) %></span></a><% categories.forEach(category => { %><a class="f-filter-category-link <%= selectedCategory?.slug===category.slug ? 'is-active' : '' %>" href="/products?category=<%= encodeURIComponent(category.slug) %>"><span class="f-filter-category-name"><%= category.name %></span><span class="f-filter-count"><%= categorySummary[category.slug] || 0 %></span></a><% }) %></div></details>
+          <button class="f-button f-button--outline f-filter-apply" type="submit">Apply filters</button>
+        </form></aside>
+
+        <div class="f-shop-results" id="new-arrivals"><% if (products.length) { %><div class="f-product-grid"><% products.forEach(cardProduct => { %><%- include('../partials/forme/components/product-card', { cardProduct }) %><% }) %></div><div class="f-load-more" aria-label="Product results"><p>Showing <%= products.length %> of <%= products.length %> styles</p><div class="f-load-progress" aria-hidden="true"><span style="width:100%"></span></div><a class="f-button f-button--outline" href="#shop-grid">Back to the first piece <span class="f-link-arrow f-link-arrow--up" aria-hidden="true"></span></a></div><% } else { %><section class="f-empty-state" aria-labelledby="empty-title"><div class="f-empty-state-inner"><p class="f-eyebrow">Nothing here yet</p><h2 id="empty-title">A quieter rack.</h2><p>No pieces match that search or category.</p><a class="f-button" href="/products">View all pieces <span class="f-link-arrow" aria-hidden="true"></span></a></div></section><% } %></div>
+      </div>
+    </section>
+  </main>
+  <%- include('../partials/forme/footer') %>
+  <style>.f-lite-filter-input{width:100%;padding:.8rem;border:1px solid var(--f-light-border);background:var(--f-light-raised);color:inherit}</style>
+</body>
+</html>

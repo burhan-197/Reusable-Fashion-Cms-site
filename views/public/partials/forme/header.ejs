@@ -1,0 +1,28 @@
+<%
+  const sharedActive = typeof active !== 'undefined' ? active : '';
+  const cats = Array.isArray(categories) ? categories : [];
+%>
+<div class="f-announcement" data-section="announcement"><div class="f-container f-announcement-inner"><p>A new season. A fresh perspective.</p><a href="/products">New arrivals <span class="f-link-arrow" aria-hidden="true"></span></a></div></div>
+<header class="f-header f-header--simple" data-section="header">
+  <div class="f-container f-header-inner f-header-inner--commerce">
+    <a href="/" class="f-brand-lockup" aria-label="FORME home"><span class="f-brand-copy"><span class="f-logo f-brand-name">FORME</span></span></a>
+    <nav class="f-desktop-nav" aria-label="Main navigation"><ul>
+      <li><a href="/" class="<%= sharedActive === 'home' ? 'is-active' : '' %>">Home</a></li>
+      <li class="f-nav-products">
+        <a class="f-nav-products-trigger <%= sharedActive === 'products' ? 'is-active' : '' %>" href="/products" aria-haspopup="true">Products</a>
+        <div class="f-nav-dropdown" aria-label="Product categories"><div class="f-nav-dropdown-categories"><h2>Browse categories</h2><ul class="f-nav-category-tree">
+          <% if (cats.length) { cats.forEach(category => { %><li><a href="/products?category=<%= encodeURIComponent(category.slug) %>"><span><%= category.name %></span><span class="f-link-arrow" aria-hidden="true"></span></a></li><% }) } else { %><li class="f-nav-empty">Categories will appear here once added.</li><% } %>
+        </ul></div></div>
+      </li>
+    </ul></nav>
+    <div class="f-header-actions" aria-label="Store utilities">
+      <a class="f-icon-link" href="#site-search" aria-label="Search" aria-controls="site-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.2 4.2"></path></svg></a>
+      <a class="f-icon-link" href="/cart" aria-label="Shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11h-11z"></path><path d="M9 9V6.8A3 3 0 0 1 12 4a3 3 0 0 1 3 2.8V9"></path></svg><span class="f-cart-count" id="navCartCount" data-cart-count>0</span></a>
+    </div>
+    <details class="f-mobile-menu"><summary>Menu <span class="f-menu-icon" aria-hidden="true"></span></summary><nav class="f-mobile-panel" aria-label="Mobile navigation">
+      <div class="f-mobile-panel-head"><span class="f-mobile-panel-title">FORME</span><button class="f-mobile-menu-close" type="button" aria-label="Close menu"><span aria-hidden="true"></span></button></div>
+      <ul><li><a href="/">Home <span class="f-link-arrow" aria-hidden="true"></span></a></li><li><a href="/products">Products <span class="f-link-arrow" aria-hidden="true"></span></a></li><% cats.forEach(category => { %><li><a href="/products?category=<%= encodeURIComponent(category.slug) %>"><%= category.name %></a></li><% }) %></ul>
+      <div class="f-mobile-utility"><a href="/cart">Bag · <span data-cart-count>0</span></a></div>
+    </nav></details>
+  </div>
+</header>

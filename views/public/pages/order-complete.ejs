@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" data-brand="editorial" data-mode="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= metaDescription %>"><meta name="theme-color" content="#20221f">
+  <title><%= pageTitle %></title><%- include('../partials/forme/seo') %>
+  <link rel="stylesheet" href="/css/forme/theme.css"><link rel="stylesheet" href="/css/forme/styles.css"><link rel="stylesheet" href="/css/forme/catalog.css"><link rel="stylesheet" href="/css/forme/content-pages.css"><link rel="stylesheet" href="/css/forme/commerce.css"><link rel="stylesheet" href="/css/forme/cms-footer.css"><%- include('../partials/forme/theme-settings') %>
+</head>
+<body class="storefront" data-cms-storefront="forme" id="top" data-currency-code="USD" data-currency-symbol="$" data-currency-position="before">
+  <a class="f-skip-link" href="#main">Skip to content</a>
+  <%- include('../partials/forme/header', {active:'cart'}) %><%- include('../partials/forme/search-overlay') %>
+  <main id="main"><section class="f-content-section"><div class="f-container"><div class="f-order-complete">
+    <p class="f-eyebrow">ORDER RECEIVED</p><h1 class="f-page-title">Your order is confirmed</h1><p class="f-page-lead">Thank you, <%= order.customerName %>. Your order has been created successfully.</p>
+    <div class="f-order-number"><span>Order</span> <strong><%= order.orderNumber %></strong></div>
+    <div class="f-order-complete-grid"><div><h2>Order Items</h2><% order.items.forEach(item=>{%><div class="f-account-detail-line"><div><strong><%= item.name %></strong><span>Qty <%= item.qty %></span></div><strong><%= formatMoney(item.price*item.qty) %></strong></div><%});%></div><aside class="f-order-summary"><h2>Summary</h2><div class="f-summary-lines"><div class="f-summary-line"><span>Subtotal</span><span><%= formatMoney(order.subtotal) %></span></div><div class="f-summary-line"><span>Shipping</span><span>Free</span></div><div class="f-summary-line f-summary-line--total"><span>Total</span><span><%= formatMoney(order.total) %></span></div></div><p class="f-form-note"><%= order.paymentMethod==='cod'?'Cash on Delivery':'Manual Payment' %> · <%= order.status %></p></aside></div>
+    <div class="f-account-delivery-grid"><section class="f-account-panel"><h2>Delivery & Contact</h2><p><strong>Name</strong><br><%= order.customerName %></p><p><strong>Address</strong><br><%= order.address %>, <%= order.city %><% if(order.postalCode){%> <%= order.postalCode %><%}%></p><% if(order.email){%><p><strong>Email</strong><br><%= order.email %></p><%}%><p><strong>Phone</strong><br><%= order.phone %></p><% if(order.notes){%><p><strong>Order note</strong><br><%= order.notes %></p><%}%></section></div>
+    <div class="f-order-complete-actions"><a class="f-button" href="/products">Continue Shopping</a></div>
+  </div></div></section></main>
+  <%- include('../partials/forme/footer') %><script src="/js/currency.js?v=<%= assetVersion %>"></script>
+</body></html>

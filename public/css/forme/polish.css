@@ -1,0 +1,21 @@
+/* FORME final interaction polish — shared by every public page. */
+.storefront :where(a[href], button:not(:disabled), summary, [role="button"], label[for], select,
+  input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"],
+  input[type="radio"], input[type="file"]) { cursor: pointer; }
+.storefront :where(button:disabled, input:disabled, select:disabled, [aria-disabled="true"]) { cursor: not-allowed !important; }
+.storefront :where(a[href], button, summary, select, label[for], [role="button"]) {
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease, opacity .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.storefront input[type="file"]::file-selector-button { cursor: pointer; }
+.storefront .f-icon-link:hover { background: color-mix(in srgb, currentColor 7%, transparent); }
+.storefront .f-icon-link:active, .storefront .f-button:active, .storefront button:active:not(:disabled) { transform: translateY(1px); }
+.storefront :where(.f-text-link,.f-filter-clear,.f-auth-switch a,.f-summary-secondary,.f-order-support a,.f-footer a):hover { opacity: .68; }
+.storefront :where(.f-gallery-thumb,.f-product-thumb,.f-search-result,.f-checkout-option,.f-mode-card):hover { border-color: color-mix(in srgb, var(--f-text) 38%, var(--f-border)); }
+.storefront summary:hover { color: var(--f-text); }
+.storefront :where(button,a,summary,input,select,textarea):focus-visible { outline: 2px solid var(--f-focus, currentColor); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .storefront :where(a[href], button, summary, select, label[for], [role="button"]) { transition: none !important; }
+}
+.storefront .f-link-arrow--up{transform:rotate(-45deg);margin-left:.25rem}
+.storefront a:hover>.f-link-arrow--up,.storefront a:hover .f-link-arrow--up{transform:rotate(-45deg) translate(.08rem,-.08rem)}
+.storefront .f-filter-check .f-subcategory-mark{display:inline-block;width:.55rem;height:1px;background:currentColor;vertical-align:middle;margin-right:.45rem;opacity:.5}
