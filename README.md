@@ -67,7 +67,7 @@ The **Full Edition** adds advanced features such as:
 
 ### Get the Full Version
 
-**[Buy FORME Fashion CMS Full Edition](PASTE_PURCHASE_LINK_HERE)**
+**[Buy FORME Fashion CMS Full Edition](https://whop.com/burhan-builds/fashion-store-cms-for-developers/)**
 
 ## Quick Start
 
