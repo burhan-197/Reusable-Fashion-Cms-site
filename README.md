@@ -1,4 +1,12 @@
+![Node.js](https://img.shields.io/badge/Node.js-18+-green)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
+
 # FORME Fashion Ecommerce CMS Lite
+
+> 🚀 **Want the full version?** Stripe, PayPal, Google Sign-In, SMTP, 
+> white-label ready → [Get the Full Edition on Whop](https://whop.com/burhan-builds/fashion-store-cms-for-developers/)
 
 A free, reusable **Node.js ecommerce CMS starter** for fashion, clothing and apparel stores.
 
@@ -65,9 +73,6 @@ The **Full Edition** adds advanced features such as:
 - Analytics and revenue reports
 - Additional CMS settings
 
-### Get the Full Version
-
-**[Buy FORME Fashion CMS Full Edition](https://whop.com/burhan-builds/fashion-store-cms-for-developers/)**
 
 ## Quick Start
 
